@@ -1,37 +1,41 @@
 package test.steps;
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 import core.cucumber.TestContext;
-import core.managers.DriverManager;
-import core.managers.PageObjectManager;
+import core.support.Context;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Scenario;
+import io.cucumber.java.Before;
 
 public class Hooks {
 	
 	TestContext testContext;
-	private DriverManager driverManager;
-	private PageObjectManager pageObjectManager;
+	Context context;
+	WebDriver driver;
 
 	public Hooks(TestContext context) {
 		testContext = context; 
 	}
 
-//	@AfterStep
-//	public void addScreenshot(Scenario scenario){
-//
-//	      final byte[] screenshot = ((TakesScreenshot) testContext.getWebDriverManager().getDriver()).getScreenshotAs(OutputType.BYTES);
-//	      scenario.attach(screenshot, "image/png", "image"); 
-//		
-//	}
+	@Before
+	public void BeforeSteps() {
+		Context.initialize(driver);
+	}
 	
 	@After
 	public void AfterSteps() {
 		testContext.getWebDriverManager().closeDriver();
 		System.out.println("Encerrando browser");
 	}
+
+	/*
+	@AfterStep
+	public void addScreenshot(Scenario scenario){
+
+	      final byte[] screenshot = ((TakesScreenshot) testContext.getWebDriverManager().getDriver()).getScreenshotAs(OutputType.BYTES);
+	      scenario.attach(screenshot, "image/png", "image"); 
+		
+	}
+	*/
 
 }

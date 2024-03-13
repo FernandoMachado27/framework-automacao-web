@@ -1,5 +1,7 @@
 package test.logic;
 
+import static core.support.Context.actions;
+
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -25,7 +27,7 @@ public class HomeLogic {
 	
 	public void paginaInicial() {
 		driver.get(FileReaderManager.getInstance().getConfigReader().getApplicationUrl());
-		wait.until(ExpectedConditions.visibilityOf(homePage.getLogo()));
+		actions().waitVisibilityOf(homePage.getLogo());
 	}
 
 	public boolean validarPaginaInicial() {
